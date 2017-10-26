@@ -17,7 +17,7 @@ Parameters are specified in constructor
 ## Usage
 
 ```bash
-const Crawler = require('./crawler')
+const Crawler = require('local-web-crawler')
 
 const lookFor = ['//input', '//select']
 const deep = -1
