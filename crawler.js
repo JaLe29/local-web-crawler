@@ -88,7 +88,6 @@ module.exports = class Crawler {
 			data[item.replace(/\W/g, '')] = this.webDriver.lookForXPath(item)
 		})
 		data['neibor'] = JSON.stringify(this._filterLocalUrl(lastLinkst))
-		console.log([url[1], data])
 		this.crawlerOutput.push([url[1], data])
 	}
 
