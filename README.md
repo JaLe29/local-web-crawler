@@ -1,23 +1,24 @@
-# Local web crawler
-Simple web crawler for crawling pages on selected domains.
-You can search for elements using XPaths.
-You can generate map of your web, or you can looking for specific elements, like a links, inputs, etc..
+# Local web crawler [![npm version](https://badge.fury.io/js/local-web-crawler.svg)](https://badge.fury.io/js/local-web-crawler)
+
+- Simple web crawler for crawling pages on selected domains.
+- You can search for elements using XPaths.
+- You can generate map of your web, or you can looking for specific elements, like a links, inputs, etc..
 
 ## Return values
-Output is array:
-```bash
+Output datastructure is array:
+```javascript
 [URL, {xpaths results, neibers}]
 ```
 ## Parameters
 Parameters are specified in constructor
-* url of home server
-* max pages for crawle
+* url of home server (like a
+* max pages for crawle (for unlimited use -1)
 * array of xpath for look
 
-## Usage
+## Example usage
 
-```bash
-const Crawler = require('local-web-crawler')
+```javascript
+const Crawler = require('./crawler')
 
 const lookFor = ['//input', '//select']
 const deep = -1
@@ -27,11 +28,25 @@ const crwlIns = new Crawler(homePage, deep, lookFor)
 
 crwlIns.crawle()
 
-console.log(crwlIns.getUrls())
+console.log(crwlIns.getUrls()) // [string:url, json:output]
 ```
 
-Output of simple example
-```bash
+What next?
+What about filter only outputs whits contains some ``` lookFor ``` values?
+(I prefer standard way, like this)
+```javascript
+let crawlerOut = crwlIns.getUrls()
+let filtered = [];
+for (let i = 0; i < crawlerOut.length; i++) {
+	let tmp = crawlerOut[i]
+	if (tmp[1].input || tmp[1].select) {
+		filtered.push(tmp[0])
+	}
+}
+```
+(I prefer standard way, like this)
+Output of example:
+```javascript
  [ 'http://oks.kiv.zcu.cz',
   { input: false,
     select: false,
