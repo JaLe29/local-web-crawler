@@ -1,4 +1,5 @@
 const WebDriver = require('./WebDriver')
+const sleep = require('system-sleep')
 
 module.exports = class Crawler {
 
@@ -11,8 +12,6 @@ module.exports = class Crawler {
 		this.webDriver = new WebDriver()
 		this.urls = new Array()
 		this.crawlerOutput = new Array()
-
-		// this.urls.push([false, home, null])
 	}
 
 	_wasCrawled(input) {
@@ -42,34 +41,40 @@ module.exports = class Crawler {
 	}
 
 	crawle() {
-		if (this.isDown) {
-			throw ('Error: Driver is closed...')
-		}
-		let iterator = 0
-		//get one unvisited url from array
+		let state = false;
 
-		let url = [false, this.home, null]
-		this.webDriver.goTo(url[1])
-		// this._crawleLocalPage(url)
-
-		while (url !== null) {
-			if (iterator > this.maxPage) {
-				break
+		(async () => {
+			if (this.isDown) {
+				throw ('Error: Driver is closed...')
 			}
+			let iterator = 0
 
-			this.webDriver.goTo(url[1])
-			this._crawleLocalPage(url)
+			let url = [false, this.home, null]
+			await this.webDriver.goTo(url[1])
 
-			this._setUrlVisited(url[1])
-			url = this._getUnvisited()
-			iterator++
+			while (url !== null) {
+				if (iterator > this.maxPage) {
+					break
+				}
+
+				await this.webDriver.goTo(url[1])
+				await this._crawleLocalPage(url)
+
+				this._setUrlVisited(url[1])
+				url = this._getUnvisited()
+				iterator++
+			}
+			await this._shutDown()
+			state = true
+		})()
+
+		while (!state) {
+			sleep(1000)
 		}
-		this._shutDown()
 	}
 
-	_crawleLocalPage(url) {
-		let lastLinkst = Array.from(new Set(this.webDriver.extractAllLinks()))
-
+	async _crawleLocalPage(url) {
+		let lastLinkst = Array.from(new Set(await this.webDriver.extractAllLinks()))
 		for (let i = 0; i < lastLinkst.length; i++) {
 			let value = lastLinkst[i]
 			let tmp = url[1]
@@ -84,21 +89,21 @@ module.exports = class Crawler {
 		}
 
 		let data = new Object()
-		this.lookFor.forEach((item) => {
-			data[item.replace(/\W/g, '')] = this.webDriver.lookForXPath(item)
-		})
+
+		for (let item of this.lookFor) {
+			data[item.replace(/\W/g, '')] = await this.webDriver.lookForXPath(item)
+		}
 		data['neibor'] = JSON.stringify(this._filterLocalUrl(lastLinkst))
 		this.crawlerOutput.push([url[1], data])
 	}
 
-	_shutDown() {
-		this.webDriver.closeDriver()
+	async _shutDown() {
+		await this.webDriver.closeDriver()
 		this.isDown = true
 	}
 
 	_isLocal(url) {
-		let tmp = url.startsWith(this.home)
-		return tmp
+		return url.startsWith(this.home)
 	}
 
 	_filterLocalUrl(array) {
