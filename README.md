@@ -47,46 +47,6 @@ for (let i = 0; i < crawlerOut.length; i++) {
 (I prefer standard way, like this)
 Output of example:
 ```javascript
- [ 'http://oks.kiv.zcu.cz',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/Prevodnik/Uvod","http://oks.kiv.zcu.cz/Forum/Uvod","http://oks.kiv.zcu.cz/OsobniCislo/Uvod"]' } ]
-[ 'http://oks.kiv.zcu.cz/Prevodnik/Uvod',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/Prevodnik/Uvod","http://oks.kiv.zcu.cz/Prevodnik/Prevodnik","http://oks.kiv.zcu.cz/Prevodnik/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/Forum/Uvod',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/Forum/Uvod","http://oks.kiv.zcu.cz/Forum/Registrace","http://oks.kiv.zcu.cz/Forum/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/OsobniCislo/Uvod',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/OsobniCislo/Uvod","http://oks.kiv.zcu.cz/OsobniCislo/Generovani","http://oks.kiv.zcu.cz/OsobniCislo/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/Prevodnik/Prevodnik',
-  { input: true,
-    select: true,
-    neibor: '["http://oks.kiv.zcu.cz/Prevodnik/Uvod","http://oks.kiv.zcu.cz/Prevodnik/Prevodnik","http://oks.kiv.zcu.cz/Prevodnik/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/Prevodnik/Napoveda',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/Prevodnik/Uvod","http://oks.kiv.zcu.cz/Prevodnik/Prevodnik","http://oks.kiv.zcu.cz/Prevodnik/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/Forum/Registrace',
-  { input: true,
-    select: true,
-    neibor: '["http://oks.kiv.zcu.cz/Forum/Uvod","http://oks.kiv.zcu.cz/Forum/Registrace","http://oks.kiv.zcu.cz/Forum/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/Forum/Napoveda',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/Forum/Uvod","http://oks.kiv.zcu.cz/Forum/Registrace","http://oks.kiv.zcu.cz/Forum/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/OsobniCislo/Generovani',
-  { input: true,
-    select: true,
-    neibor: '["http://oks.kiv.zcu.cz/OsobniCislo/Uvod","http://oks.kiv.zcu.cz/OsobniCislo/Generovani","http://oks.kiv.zcu.cz/OsobniCislo/Napoveda"]' } ]
-[ 'http://oks.kiv.zcu.cz/OsobniCislo/Napoveda',
-  { input: false,
-    select: false,
-    neibor: '["http://oks.kiv.zcu.cz/OsobniCislo/Uvod","http://oks.kiv.zcu.cz/OsobniCislo/Generovani","http://oks.kiv.zcu.cz/OsobniCislo/Napoveda"]' } ]
 [ [ 'http://oks.kiv.zcu.cz',
     { input: false,
       select: false,
