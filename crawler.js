@@ -1,5 +1,4 @@
 const WebDriver = require('./WebDriver')
-const sleep = require('system-sleep')
 
 module.exports = class Crawler {
 
@@ -68,9 +67,7 @@ module.exports = class Crawler {
 			state = true
 		})()
 
-		while (!state) {
-			sleep(1000)
-		}
+		require('deasync').loopWhile(() => { return !state })
 	}
 
 	async _crawleLocalPage(url) {
