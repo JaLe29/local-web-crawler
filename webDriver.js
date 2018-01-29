@@ -6,7 +6,7 @@ const { By } = require('selenium-webdriver')
 
 const CHROME_OPTIONS = {
 	'args': [
-		'--headless', '--test-type', 'disable-web-security', '--log-level=3', '--silent', '--no-sandbox', '--disable-gpu','--log-path=NUL',
+		'--headless', '--test-type', 'disable-web-security', '--log-level=3', '--silent', '--no-sandbox', '--disable-gpu', '--log-path=NUL',
 	],
 	'prefs': {
 		'profile.managed_default_content_settings.images': 2,
@@ -25,6 +25,7 @@ module.exports = class WebDriver {
 
 	async _init() {
 		this.failCredits = DEFAULT_FAIL_CREDITS
+
 		let chromeCapabilities = webdriver.Capabilities.chrome()
 		chromeCapabilities.set('chromeOptions', CHROME_OPTIONS)
 
@@ -66,7 +67,6 @@ module.exports = class WebDriver {
 						if (isHtml) {
 							let state = false;
 							(async () => {
-								// console.log(url)
 								try {
 									await this.driver.get(url)
 								} catch (error) {
@@ -100,12 +100,21 @@ module.exports = class WebDriver {
 			let callback = arguments[arguments.length - 1]
 
 			let data = []
+
+			//check frames
 			for (let i = 0; i < window.frames.length; i++) {
 				let tmp = window.frames[i].document.getElementsByTagName('a')
 				for (let j = 0; j < tmp.length; j++) {
 					data.push(tmp[j].href)
 				}
 			}
+
+			//check single link
+			let tmp = document.links
+			for (let i = 0; i < tmp.length; i++) {
+				data.push(tmp[i].href)
+			}
+
 			callback(data)
 		}).catch(() => { res = [] }).then(data => res = data)
 		return res
