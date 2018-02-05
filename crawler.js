@@ -1,4 +1,4 @@
-const WebDriver = require('./WebDriver')
+const WebDriver = require('./web-driver')
 
 module.exports = class Crawler {
 
