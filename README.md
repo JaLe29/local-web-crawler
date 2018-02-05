@@ -88,3 +88,15 @@ Output of example:
       select: false,
       neibor: '["http://oks.kiv.zcu.cz/OsobniCislo/Uvod","http://oks.kiv.zcu.cz/OsobniCislo/Generovani","http://oks.kiv.zcu.cz/OsobniCislo/Napoveda"]' } ] ]
 ```
+
+## Problem with chrome driver
+If you have some problem with chrome driver, try following commands
+```
+apt-get install default-jre
+apt-get -f install
+
+# install chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+```
+Note: Tested on Debian 8.1, 64b and Windows 10, 64b
