@@ -103,10 +103,12 @@ module.exports = class WebDriver {
 
 			//check frames
 			for (let i = 0; i < window.frames.length; i++) {
-				let tmp = window.frames[i].document.getElementsByTagName('a')
-				for (let j = 0; j < tmp.length; j++) {
-					data.push(tmp[j].href)
-				}
+				try {
+					let tmp = window.frames[i].document.getElementsByTagName('a')
+					for (let j = 0; j < tmp.length; j++) {
+						data.push(tmp[j].href)
+					}
+				} catch (e) { /* ignore cross origin */ }
 			}
 
 			//check single link

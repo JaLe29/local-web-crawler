@@ -16,6 +16,15 @@ Parameters are specified in constructor
 * array of xpath for look
 
 ## Example usage
+NOTE: Use full url, like (or without www):
+```javascript
+http://www.example.com/
+```
+because
+
+```javascript
+http://www.example.com/ != http://example.com/
+```
 
 ```javascript
 const Crawler = require('./crawler')
