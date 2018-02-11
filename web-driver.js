@@ -40,8 +40,8 @@ module.exports = class WebDriver {
 		// 			console.log('[%s] %s', entry.level.name, entry.message)
 		// 		})
 		// 	})
-		this.driver.manage().timeouts().implicitlyWait(5)
-		this.driver.manage().timeouts().pageLoadTimeout(5000)
+		this.driver.manage().timeouts().implicitlyWait(100)
+		this.driver.manage().timeouts().pageLoadTimeout(30000)
 	}
 
 	async goTo(url) {
